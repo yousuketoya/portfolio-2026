@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遠矢洋介 ポートフォリオ | Web App Developer & SEO Writer</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#0c4a6e',
+                            accent: '#10b981',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans JP', 'sans-serif'],
+                        en: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- 共通スタイル・カスタムクラス定義（保守用） -->
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+
+        /* 資格バッジ */
+        .badge-qualification {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.375rem 0.875rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background-color: #ffffff;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .badge-qualification-blue {
+            color: #0369a1;
+            border: 1px solid #e0f2fe;
+        }
+
+        .badge-qualification-green {
+            color: #047857;
+            border: 1px solid #d1fae5;
+        }
+
+        /* ボタン共通 */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.75rem;
+            border-radius: 0.75rem;
+            background-color: #0284c7;
+            color: #ffffff;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #0369a1;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.75rem;
+            border-radius: 0.75rem;
+            background-color: #ffffff;
+            color: #334155;
+            font-weight: 700;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+        }
+
+        .btn-card-action {
+            width: 100%;
+            padding: 0.5rem 0;
+            border-radius: 0.5rem;
+            background-color: #f8fafc;
+            color: #0284c7;
+            border: 1px solid #e2e8f0;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-card-action:hover {
+            background-color: #f0f9ff;
+            border-color: #bae6fd;
+        }
+
+        /* カードスタイル */
+        .card-strength {
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-work {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card-work:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* セクションタイトル */
+        .section-subtitle {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #0284c7;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 0.25rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        @media (min-width: 640px) {
+            .section-title {
+                font-size: 1.875rem;
+            }
+        }
+
+        /* モーダル */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background-color: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            max-width: 36rem;
+            width: 100%;
+            padding: 1.5rem;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        #modal-app2-p {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #modal-app2-p:hover {
+            color: #0284c7;
+            cursor: pointer;
+        }
+
+        .seo-writing a:hover {
+            color: #0284c7;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-40 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2 text-slate-800 font-bold text-lg tracking-tight">
+                <span
+                    class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-500 to-brand-accent flex items-center justify-center text-white text-sm">T</span>
+                <span>Yousuke Toya</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-sm text-slate-600">
+                <a href="#about" class="hover:text-brand-500 transition">強み・保有資格</a>
+                <a href="#works" class="hover:text-brand-500 transition">制作実績</a>
+                <a href="#skills" class="hover:text-brand-500 transition">スキルセット</a>
+                <a href="#contact"
+                    class="px-4 py-2 rounded-full bg-brand-500 text-white font-medium hover:bg-brand-600 transition shadow-sm">お問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+        class="pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-b from-brand-50/60 via-slate-50 to-slate-50 text-center">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+
+            <!-- Qualifications Badge Row -->
+            <div class="flex flex-wrap justify-center gap-2 mb-6">
+                <span class="badge-qualification badge-qualification-blue">
+                    <i class="fa-solid fa-user-doctor mr-1.5 text-brand-500"></i>理学療法士（国家資格）
+                </span>
+                <span class="badge-qualification badge-qualification-green">
+                    <i class="fa-solid fa-coins mr-1.5 text-emerald-500"></i>3級FP技能士
+                </span>
+            </div>
+
+            <h1
+                class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+                Web開発 × ライティングの総合力で<br class="hidden sm:inline">課題解決をスピーディーに支援
+            </h1>
+
+            <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto mb-8 font-medium">
+                遠矢 洋介（トオヤ ヨウスケ）
+            </p>
+
+            <!-- Key Services List Box -->
+            <div
+                class="max-w-2xl mx-auto bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 text-left mb-10">
+                <h2
+                    class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">
+                    対応可能業務</h2>
+                <ul class="space-y-3 font-medium text-slate-700 text-sm sm:text-base">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-circle-check text-brand-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <span><strong class="text-slate-900 font-bold">Webアプリ開発</strong>：要件定義からNode.js /
+                            Firebaseでの構築まで対応</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-circle-check text-brand-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <span><strong class="text-slate-900 font-bold">WordPress</strong>：サイト構築・直接入稿・記事装飾まで完結</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-circle-check text-brand-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <span><strong class="text-slate-900 font-bold">SEOライティング</strong>：プロの添削を経た高品質な記事執筆</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#works" class="btn-primary">制作実績を見る</a>
+                <a href="#about" class="btn-secondary">強みと資格について</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strong Points & Qualifications Section -->
+    <section id="about" class="py-16 bg-white border-y border-slate-200/80">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12">
+                <p class="section-subtitle">STRENGTH & CREDENTIALS</p>
+                <h2 class="section-title">専門資格とワンストップ対応力</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Point 1 -->
+                <div class="card-strength">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">国家資格・専門知識による高い信頼性</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        <strong>理学療法士</strong>としての臨床経験と、<strong>3級FP技能士</strong>としての金融知識を保有。正確性が求められるヘルスケア・医療分野および資産運用ジャンル（YMYL領域）において、根拠に基づくコンテンツを提供できます。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2.5 py-1 rounded bg-white text-slate-600 border border-slate-200 text-xs font-medium">ヘルスケア/医療</span>
+                        <span
+                            class="px-2.5 py-1 rounded bg-white text-slate-600 border border-slate-200 text-xs font-medium">介護・ADL理解</span>
+                        <span
+                            class="px-2.5 py-1 rounded bg-white text-slate-600 border border-slate-200 text-xs font-medium">資産運用/マネー</span>
+                    </div>
+                </div>
+
+                <!-- Point 2 -->
+                <div class="card-strength">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">WordPressフル直接入稿・ワンストップ体制</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        文章作成やWeb開発にとどまらず、<strong>WordPressへの直接入稿作業（アイキャッチ設定・タグ・カテゴリ分類・見出し装飾・パーマリンク設定）</strong>までワンストップで完結。貴社側の公開作業にかかる工数を大幅に削減します。
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2.5 py-1 rounded bg-white text-slate-600 border border-slate-200 text-xs font-medium">WordPress完全対応</span>
+                        <span
+                            class="px-2.5 py-1 rounded bg-white text-slate-600 border border-slate-200 text-xs font-medium">プロ添削フィードバック済</span>
+                        <span
+                            class="px-2.5 py-1 rounded bg-white text-slate-600 border border-slate-200 text-xs font-medium">実務導入経験</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Section -->
+    <section id="works" class="py-20 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10">
+                <p class="section-subtitle">PORTFOLIO</p>
+                <h2 class="section-title">制作・執筆実績</h2>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex justify-center mb-10">
+                <div class="inline-flex p-1 rounded-xl bg-white border border-slate-200 shadow-sm text-sm font-medium">
+                    <button onclick="filterWorks('all')" id="btn-all"
+                        class="tab-btn active px-5 py-2 rounded-lg bg-brand-500 text-white font-bold transition">すべて</button>
+                    <button onclick="filterWorks('app')" id="btn-app"
+                        class="tab-btn px-5 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition">Webアプリ開発</button>
+                    <button onclick="filterWorks('website')" id="btn-website"
+                        class="tab-btn px-5 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition">Webサイト制作</button>
+                    <button onclick="filterWorks('writing')" id="btn-writing"
+                        class="tab-btn px-5 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition">SEOライティング</button>
+                </div>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Work 1: App -->
+                <div class="work-card app card-work">
+                    <div
+                        class="h-44 bg-gradient-to-br from-slate-100 to-brand-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
+                        <i class="fa-solid fa-hospital-user text-5xl text-brand-500"></i>
+                        <span
+                            class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-brand-500 text-white text-xs font-bold">Webアプリ</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2">老健向け業務支援・ADL管理システム</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                介護現場の業務負荷軽減を目指した総合管理ツール。ADL追跡機能やAIを活用したケアプラン作成補助機能を搭載。
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">HTML/CSS
+                                </span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">JavaScript</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">Node.js</span>
+                            </div>
+                            <button onclick="openModal('modal-app1')" class="btn-card-action">詳細を見る</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work 2: App -->
+                <div class="work-card app card-work">
+                    <div
+                        class="h-44 bg-gradient-to-br from-slate-100 to-emerald-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
+                        <i class="fa-solid fa-trophy text-5xl text-emerald-500"></i>
+                        <span
+                            class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-emerald-600 text-white text-xs font-bold">Webアプリ</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2">バドミントン リアルタイムスコア判定</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                スマホ・タブレットから試合スコアを直感的に記録できるカウンターWebアプリケーション。
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">HTML/CSS</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">JavaScript</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">Firebase</span>
+                            </div>
+                            <button onclick="openModal('modal-app2')" class="btn-card-action">詳細を見る</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work 3: Website -->
+                <div class="work-card website card-work">
+                    <div
+                        class="h-44 bg-gradient-to-br from-slate-100 to-cyan-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
+                        <i class="fa-solid fa-globe text-5xl text-cyan-600"></i>
+                        <span
+                            class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-cyan-600 text-white text-xs font-bold">WordPress</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2">事業用WordPressWebサイト構築</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                モバイル最適化、問い合わせフォーム設置、基本SEO設計まで対応したWordPress実用サイト構築。
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">WordPress</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">Elementor</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">レスポンシブ</span>
+                            </div>
+                            <a href="https://eight-body.jp/" target="_blank" rel="noopener"
+                                class="btn-card-action block">
+                                実績サイトを見る <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work 4: Writing -->
+                <div class="work-card writing card-work">
+                    <div
+                        class="h-44 bg-gradient-to-br from-slate-100 to-amber-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
+                        <i class="fa-solid fa-pen-nib text-5xl text-amber-500"></i>
+                        <span
+                            class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-amber-600 text-white text-xs font-bold">SEOライティング</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2">プロ添削済み 実務WEB記事執筆 (5本)</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                実際のWEBメディアに寄稿。編集者によるプロの添削を経た確かなクオリティ。WP直接入稿まで対応。
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span
+                                    class="px-2 py-0.5 rounded bg-amber-50 text-amber-700 text-xs font-bold">プロ校正完了</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">WPフル入稿</span>
+                            </div>
+                            <button onclick="openModal('modal-writing')" class="btn-card-action">執筆実績の詳細を見る</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work 5: App -->
+                <div class="work-card app card-work">
+                    <div
+                        class="h-44 bg-gradient-to-br from-slate-100 to-purple-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
+                        <i class="fa-solid fa-pills text-5xl text-purple-500"></i>
+                        <span
+                            class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-purple-600 text-white text-xs font-bold">Webアプリ</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2">お薬リマインダー・服薬管理アプリ</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                飲み忘れ防止のためのシンプルWebアプリ。高齢者にも配慮したユニバーサルデザインを採用。
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">HTML/CSS</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">JS</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">GitHub
+                                    Pages</span>
+                            </div>
+                            <button onclick="openModal('modal-app3')" class="btn-card-action">詳細を見る</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 bg-white border-t border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12">
+                <p class="section-subtitle">SKILL SET</p>
+                <h2 class="section-title">使用可能スキル・ツール</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="p-5 rounded-xl border border-slate-200 bg-slate-50">
+                    <h3 class="font-bold text-slate-900 text-base mb-3 flex items-center">
+                        <i class="fa-solid fa-code text-brand-500 mr-2"></i>Webアプリ・サイト開発
+                    </h3>
+                    <ul class="text-sm space-y-2 text-slate-600 font-medium">
+                        <li>・HTML5 / CSS3 / JavaScript</li>
+                        <li>・Node.js</li>
+                        <li>・Firebase (Hosting / DB)</li>
+                        <li>・WordPress構築・カスタマイズ</li>
+                        <li>・Git / GitHub</li>
+                    </ul>
+                </div>
+
+                <div class="p-5 rounded-xl border border-slate-200 bg-slate-50">
+                    <h3 class="font-bold text-slate-900 text-base mb-3 flex items-center">
+                        <i class="fa-solid fa-pen-fancy text-emerald-500 mr-2"></i>ライティング・編集
+                    </h3>
+                    <ul class="text-sm space-y-2 text-slate-600 font-medium">
+                        <li>・SEOライティング / 構成案作成</li>
+                        <li>・WordPressフル直接入稿対応</li>
+                        <li>・生成AI活用（プロンプト作成）</li>
+                    </ul>
+                </div>
+
+                <div class="p-5 rounded-xl border border-slate-200 bg-slate-50">
+                    <h3 class="font-bold text-slate-900 text-base mb-3 flex items-center">
+                        <i class="fa-solid fa-graduation-cap text-amber-500 mr-2"></i>専門資格・その他
+                    </h3>
+                    <ul class="text-sm space-y-2 text-slate-600 font-medium">
+                        <li>・理学療法士（国家資格）</li>
+                        <li>・FP3級</li>
+                        <li>・Canvaデザイン作成</li>
+                        <li>・レスポンシブ UI設計</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-b from-slate-50 to-brand-50/40">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+            <p class="section-subtitle">CONTACT</p>
+            <h2 class="section-title mb-4">お問い合わせ・ご相談</h2>
+            <p class="text-slate-600 text-sm leading-relaxed mb-8">
+                Webアプリの開発、WordPressサイトの構築・修正、SEO記事の執筆から入稿まで、お気軽にご相談ください。<br>
+                クラウドソーシング経由でのご依頼も丁寧かつ迅速に対応いたします。
+            </p>
+            <div class="inline-flex flex-col sm:flex-row gap-4">
+                <a href="https://yousuke-web.com/" target="_blank" rel="noopener" class="btn-primary">
+                    運営サイト経由で問い合わせ <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-white border-t border-slate-200 text-center text-xs text-slate-400">
+        <p>&copy; 2026 Yousuke Toya. All Rights Reserved.</p>
+    </footer>
+
+    <!-- MODAL: Writing Detail -->
+    <div id="modal-writing" class="hidden modal-backdrop">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-100">
+                <h3 class="font-bold text-lg text-slate-900">プロ添削済み 実務ライティング実績 (5本)</h3>
+                <button onclick="closeModal('modal-writing')" class="text-slate-400 hover:text-slate-600"><i
+                        class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="space-y-4 text-sm text-slate-600">
+                <div class="p-3 bg-brand-50/50 rounded-lg border border-brand-100">
+                    <p class="font-bold text-brand-700 text-xs mb-1">【実績の特徴】</p>
+                    <p>実際の運営メディアに掲載。プロの編集者による添削と校正プロセスを通過した確実な品質と読みやすさを提供します。</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">■ 対応可能な強み</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>WordPress直接入稿</strong>（アイキャッチ設定、タグ分け、パーマリンク設定）</li>
+                        <li><strong>見やすさを高める装飾</strong>（マーカー、見出しデザイン、画像挿入）</li>
+                        <li><strong>理学療法士・FP3級</strong>の知識に基づくファクトチェック</li>
+                    </ul>
+                    <p style="margin: 20px 0 14px;">実際の記事入稿後はこちら</p>
+                    <ul class="seo-writing">
+                        <li><a href="https://akihiro-iwashiro-official.com/communication-mistake/" target="_blank"
+                                rel="noopener noreferrer">・コミュニケーションミスの原因と解決策｜今日から使える防止策３選</a></li>
+                        <li><a href="https://akihiro-iwashiro-official.com/%e3%82%b3%e3%83%9f%e3%83%a5%e3%83%8b%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%a8%e3%81%af%ef%bc%9f%e6%84%8f%e5%91%b3%e3%83%bb%e9%87%8d%e8%a6%81%e6%80%a7%e3%82%84%e8%89%af%e5%a5%bd%e3%81%aa/"
+                                target="_blank" rel="noopener noreferrer">・コミュニケーションとは？意味・重要性や良好な関係を築く4つのスキルを解説</a></li>
+                        <li><a href="https://akihiro-iwashiro-official.com/%e6%96%b0%e4%ba%ba%e7%a0%94%e4%bf%ae%e3%82%ab%e3%83%aa%e3%82%ad%e3%83%a5%e3%83%a9%e3%83%a0%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9%e3%80%90%e5%8d%b3%e6%88%a6%e5%8a%9b%e3%81%a8%e9%9b%a2%e8%81%b7%e9%98%b2/"
+                                target="_blank" rel="noopener noreferrer">・新人研修カリキュラムの作り方｜定着と早期戦力化を支える設計</a></li>
+                        <li><a href="https://akihiro-iwashiro-official.com/people-who-are-not-good-at-communication/"
+                                target="_blank" rel="noopener noreferrer">・コミュニケーションが苦手な人はどうすれば良い？原因と対策を解説</a></li>
+                        <li><a href="https://akihiro-iwashiro-official.com/assertion-training/" target="_blank"
+                                rel="noopener noreferrer">・アサーショントレーニングとは｜導入するメリットや具体例をご紹介</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button onclick="closeModal('modal-writing')"
+                    class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-xs">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: App 1 Detail -->
+    <div id="modal-app1" class="hidden modal-backdrop">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-100">
+                <h3 class="font-bold text-lg text-slate-900">老健向け業務支援・ADL管理システム</h3>
+                <button onclick="closeModal('modal-app1')" class="text-slate-400 hover:text-slate-600"><i
+                        class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="space-y-4 text-sm text-slate-600">
+                <p>理学療法士としての現場知見を直接活かしたWebアプリケーション。</p>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">■ 実装機能</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>ADL（日常的日常生活動作）のリアルタイム追跡</li>
+                        <li>Firebaseを用いたリアルタイムデータ更新</li>
+                        <li>AIプロンプト連携によるケアプラン自動作成補助</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button onclick="closeModal('modal-app1')"
+                    class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-xs">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: App 2 Detail -->
+    <div id="modal-app2" class="hidden modal-backdrop">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-100">
+                <h3 class="font-bold text-lg text-slate-900">バドミントン リアルタイムスコア判定</h3>
+                <button onclick="closeModal('modal-app2')" class="text-slate-400 hover:text-slate-600"><i
+                        class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="space-y-4 text-sm text-slate-600">
+                <p>コートサイドのスマホやタブレットでスムーズにスコアを記録・共有できるWebアプリ。</p>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">■ 工夫した点</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>誤操作を防ぐ大きなタップ領域のUI設計</li>
+                        <li>Firebase Hostingによる高速表示</li>
+                    </ul>
+                    <p style="margin: 20px 0 10px;">Webアプリはこちら↓↓s</p>
+                    <p id="modal-app2-p"><a href="https://badminton-score-app-2026.web.app/"
+                            target="_blank">バドミントンWebアプリ</a></p>
+                </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button onclick="closeModal('modal-app2')"
+                    class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-xs">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: App 3 Detail -->
+    <div id="modal-app3" class="hidden modal-backdrop">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-100">
+                <h3 class="font-bold text-lg text-slate-900">お薬リマインダー・服薬管理アプリ</h3>
+                <button onclick="closeModal('modal-app3')" class="text-slate-400 hover:text-slate-600"><i
+                        class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="space-y-4 text-sm text-slate-600">
+                <p>GitHub Pagesで公開中の服薬スケジュール管理Webアプリ。</p>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">■ 特徴</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>シンプルで迷わないユニバーサルデザイン</li>
+                        <li>軽量なプレーンJavaScript構成</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button onclick="closeModal('modal-app3')"
+                    class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-xs">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Category Filter
+        function filterWorks(category) {
+            const cards = document.querySelectorAll('.work-card');
+            const buttons = document.querySelectorAll('.tab-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-500', 'text-white', 'font-bold');
+                btn.classList.add('text-slate-600');
+            });
+
+            const activeBtn = document.getElementById(`btn-${category}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-brand-500', 'text-white', 'font-bold');
+                activeBtn.classList.remove('text-slate-600');
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Modal Open / Close
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // Close modal on background click
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal-backdrop')) {
+                event.target.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+
+</html>
