@@ -497,6 +497,40 @@
                     </div>
                 </div>
 
+                <!-- Work 6: SociQuest -->
+                <div class="work-card app card-work">
+                    <div
+                        class="h-44 bg-gradient-to-br from-indigo-50 via-violet-50 to-cyan-50 flex items-center justify-center p-6 border-b border-slate-100 relative overflow-hidden">
+                        <div class="absolute -right-5 -top-8 w-32 h-32 rounded-full bg-violet-200/40"></div>
+                        <div class="absolute -left-6 -bottom-10 w-32 h-32 rounded-full bg-cyan-200/40"></div>
+                        <div class="relative text-center">
+                            <i class="fa-solid fa-compass text-5xl text-indigo-600"></i>
+                            <p class="mt-2 text-sm font-extrabold tracking-wider text-indigo-900">SociQuest</p>
+                        </div>
+                        <span
+                            class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-indigo-600 text-white text-xs font-bold">AI学習アプリ</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2">SociQuest｜社会科・高校入試対策アプリ</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                中学生の高校入試対策をサポートする学習アプリ。歴史・地理・公民のクイズに加え、苦手問題の復習や音声学習、AIへの質問機能をまとめました。
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">HTML/CSS</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">JavaScript</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">Gemini API</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">GitHub
+                                    Pages</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-xs">Firebase</span>
+                            </div>
+                            <button onclick="openModal('modal-sociquest')" class="btn-card-action">詳細を見る</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -695,6 +729,57 @@
             </div>
             <div class="mt-6 text-right">
                 <button onclick="closeModal('modal-app3')"
+                    class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-xs">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: SociQuest Detail -->
+    <div id="modal-sociquest" class="hidden modal-backdrop">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-100">
+                <h3 class="font-bold text-lg text-slate-900">SociQuest｜社会科・高校入試対策アプリ</h3>
+                <button onclick="closeModal('modal-sociquest')" class="text-slate-400 hover:text-slate-600"
+                    aria-label="閉じる"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="space-y-4 text-sm text-slate-600">
+                <p>中学3年生の高校入試対策を想定して制作した、社会科の学習Webアプリです。学習をクエスト形式にし、日々取り組みやすい構成を目指しました。</p>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">■ 主な機能</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>歴史・地理・公民の分野別クイズ</li>
+                        <li>学習結果に応じて苦手な問題を振り返る「弱点バスター」</li>
+                        <li>音声を使って学べる「聞き流しラジオ」</li>
+                        <li>AIソシオ先生への質問機能（Gemini APIキー設定時）</li>
+                        <li>問題データのJSON一括追加・編集機能</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">■ 制作で意識したこと</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>学習内容を分野ごとに整理し、目的の学習へ進みやすくすること</li>
+                        <li>理解度を記録し、復習につなげられる仕組み</li>
+                        <li>AIを活用した質問・問題データ追加による学習内容の拡張</li>
+                    </ul>
+                </div>
+                <div class="rounded-xl bg-indigo-50 border border-indigo-100 p-4">
+                    <p class="font-bold text-indigo-900 mb-1">デモ版を公開中</p>
+                    <p class="text-indigo-800 mb-3">実際の画面や操作を確認できます。</p>
+                    <a href="https://yousuketoya.github.io/shakai-app-demo/" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center font-bold text-indigo-700 hover:text-indigo-900 underline underline-offset-4">
+                        SociQuestを試す <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+                    </a>
+                </div>
+                <div class="rounded-xl bg-amber-50 border border-amber-200 p-4">
+                    <p class="font-bold text-amber-900 mb-1">■ AI機能の利用について</p>
+                    <p class="text-amber-900">Google AI StudioでGemini
+                        APIキーを発行し、アプリ内の設定画面に登録すると、AIソシオ先生をはじめとするAI機能をすべて利用できます。</p>
+                    <p class="text-xs text-amber-800 mt-2">※
+                        APIキーの発行・登録が必要です。利用時はインターネット接続が必要で、Google側の利用条件や使用量に応じて制限・料金が発生する場合があります。</p>
+                </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button onclick="closeModal('modal-sociquest')"
                     class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-xs">閉じる</button>
             </div>
         </div>
